@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <title>SPIKE Prime IDE</title>
-  <!-- FIX: Swapping to unpkg URLs which are automatically whitelisted by browser security policies -->
-  <script src="https://unpkg.com"></script>
-  <script src="https://unpkg.com"></script>
-  <script src="https://unpkg.com"></script>
-  <script src="https://unpkg.com"></script>
+  <!-- FIX: Using secure cdnjs links with type rules to force browsers to execute the script -->
+  <script src="https://cloudflare.com" type="text/javascript"></script>
+  <script src="https://cloudflare.com" type="text/javascript"></script>
+  <script src="https://cloudflare.com" type="text/javascript"></script>
+  <script src="https://cloudflare.com" type="text/javascript"></script>
   <style>
     html, body { 
       margin: 0; 
@@ -59,7 +59,6 @@
 
   <script>
     function initWorkspace() {
-      // Safety Loop: If the unpkg network files take a split second to download, wait and retry
       if (typeof Blockly === 'undefined') {
         setTimeout(initWorkspace, 100);
         return;
@@ -171,7 +170,6 @@
       });
     }
 
-    // Run when browser completes assembling the page DOM elements tree structures
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initWorkspace);
     } else {
@@ -180,6 +178,7 @@
   </script>
 </body>
 </html>
+
 
 
 
