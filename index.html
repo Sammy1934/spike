@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <title>SPIKE Prime IDE</title>
-  <!-- Force the browser to grab valid, unblocked script engines -->
-  <script src="https://unpkg.com"></script>
-  <script src="https://unpkg.com"></script>
-  <script src="https://unpkg.com"></script>
-  <script src="https://unpkg.com"></script>
+  <!-- Load high-availability scripts natively whitelisted by browser security filters -->
+  <script src="https://cloudflare.com"></script>
+  <script src="https://cloudflare.com"></script>
+  <script src="https://cloudflare.com"></script>
+  <script src="https://cloudflare.com"></script>
   <style>
-    /* Prevent the box from collapsing to 0 pixels tall */
+    /* Stop the view frame container from collapsing to 0px tall */
     html, body { 
       margin: 0; 
       padding: 0; 
@@ -25,10 +25,9 @@
   </style>
 </head>
 <body>
-  <!-- The main graphics rendering box container -->
   <div id="blocklyDiv"></div>
 
-  <!-- Define the 9 official LEGO SPIKE Prime sidebar toolbars -->
+  <!-- The 9 Official LEGO SPIKE Prime Toolbar Categories -->
   <xml id="toolbox" style="display: none">
     <category name="⚙️ Motors" colour="#009688">
       <block type="m_run"></block>
@@ -162,14 +161,6 @@
         grid: { spacing: 20, length: 3, colour: '#ccc', snap: true },
         zoom: { controls: true, wheel: true, startScale: 1.0, maxScale: 3, minScale: 0.3, scaleSpeed: 1.2 }
       });
-
-      // Pass compiled list array strings back up to the parent Bubble app frame
-      workspace.addChangeListener(function() {
-        var code = Blockly.JavaScript.workspaceToCode(workspace);
-        if (parent && parent.window.bubble_fn_sendScriptToBubble) {
-          parent.window.bubble_fn_sendScriptToBubble(code.split('\n'));
-        }
-      });
     }
 
     if (document.readyState === 'loading') {
@@ -180,6 +171,7 @@
   </script>
 </body>
 </html>
+
 
 
 
