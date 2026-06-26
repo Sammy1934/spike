@@ -48,111 +48,117 @@
   </xml>
 
   <script>
-    // Define the custom word blocks to look exactly like LEGO SPIKE software
-    Blockly.Blocks['m_run'] = {
-      init: function() {
-        this.appendDummyInput()
-            .appendField("motor")
-            .appendField(new Blockly.FieldDropdown([["A","A"], ["B","B"], ["C","C"], ["D","D"]]), "PORT")
-            .appendField("run")
-            .appendField(new Blockly.FieldDropdown([["↻","CW"], ["↺","CCW"]]), "DIR")
-            .appendField("for")
-            .appendField(new Blockly.FieldNumber(1), "ROT")
-            .appendField("rotations");
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setColour('#009688');
-      }
-    };
+    // FIX: Wait patiently for the window and all unpkg script files to fully load before initializing
+    window.addEventListener('load', function() {
+      
+      // Define the custom word blocks to look exactly like LEGO SPIKE software
+      Blockly.Blocks['m_run'] = {
+        init: function() {
+          this.appendDummyInput()
+              .appendField("motor")
+              .appendField(new Blockly.FieldDropdown([["A","A"], ["B","B"], ["C","C"], ["D","D"]]), "PORT")
+              .appendField("run")
+              .appendField(new Blockly.FieldDropdown([["↻","CW"], ["↺","CCW"]]), "DIR")
+              .appendField("for")
+              .appendField(new Blockly.FieldNumber(1), "ROT")
+              .appendField("rotations");
+          this.setPreviousStatement(true);
+          this.setNextStatement(true);
+          this.setColour('#009688');
+        }
+      };
 
-    Blockly.Blocks['m_stop'] = {
-      init: function() {
-        this.appendDummyInput()
-            .appendField("stop motor")
-            .appendField(new Blockly.FieldDropdown([["A","A"], ["B","B"], ["C","C"], ["D","D"]]), "PORT");
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setColour('#009688');
-      }
-    };
+      Blockly.Blocks['m_stop'] = {
+        init: function() {
+          this.appendDummyInput()
+              .appendField("stop motor")
+              .appendField(new Blockly.FieldDropdown([["A","A"], ["B","B"], ["C","C"], ["D","D"]]), "PORT");
+          this.setPreviousStatement(true);
+          this.setNextStatement(true);
+          this.setColour('#009688');
+        }
+      };
 
-    Blockly.Blocks['mv_pair'] = {
-      init: function() {
-        this.appendDummyInput()
-            .appendField("pair motors")
-            .appendField(new Blockly.FieldDropdown([["A+B","AB"], ["C+D","CD"]]), "PAIR");
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setColour('#e91e63');
-      }
-    };
+      Blockly.Blocks['mv_pair'] = {
+        init: function() {
+          this.appendDummyInput()
+              .appendField("pair motors")
+              .appendField(new Blockly.FieldDropdown([["A+B","AB"], ["C+D","CD"]]), "PAIR");
+          this.setPreviousStatement(true);
+          this.setNextStatement(true);
+          this.setColour('#e91e63');
+        }
+      };
 
-    Blockly.Blocks['mv_dist'] = {
-      init: function() {
-        this.appendDummyInput()
-            .appendField("move pair")
-            .appendField(new Blockly.FieldDropdown([["forward","F"], ["backward","B"]]), "DIR")
-            .appendField("for")
-            .appendField(new Blockly.FieldNumber(10), "DIST")
-            .appendField("cm");
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setColour('#e91e63');
-      }
-    };
+      Blockly.Blocks['mv_dist'] = {
+        init: function() {
+          this.appendDummyInput()
+              .appendField("move pair")
+              .appendField(new Blockly.FieldDropdown([["forward","F"], ["backward","B"]]), "DIR")
+              .appendField("for")
+              .appendField(new Blockly.FieldNumber(10), "DIST")
+              .appendField("cm");
+          this.setPreviousStatement(true);
+          this.setNextStatement(true);
+          this.setColour('#e91e63');
+        }
+      };
 
-    Blockly.Blocks['l_show'] = {
-      init: function() {
-        this.appendDummyInput()
-            .appendField("display matrix pattern")
-            .appendField(new Blockly.FieldDropdown([["☺ Smile","S"], ["♥ Heart","H"], ["☹ Sad","Sad"]]), "PATTERN");
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setColour('#9c27b0');
-      }
-    };
+      Blockly.Blocks['l_show'] = {
+        init: function() {
+          this.appendDummyInput()
+              .appendField("display matrix pattern")
+              .appendField(new Blockly.FieldDropdown([["☺ Smile","S"], ["♥ Heart","H"], ["☹ Sad","Sad"]]), "PATTERN");
+          this.setPreviousStatement(true);
+          this.setNextStatement(true);
+          this.setColour('#9c27b0');
+        }
+      };
 
-    Blockly.Blocks['s_beep'] = {
-      init: function() {
-        this.appendDummyInput()
-            .appendField("play beep note")
-            .appendField(new Blockly.FieldNumber(60), "NOTE")
-            .appendField("for")
-            .appendField(new Blockly.FieldNumber(0.2), "SECS")
-            .appendField("s");
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setColour('#00bcd4');
-      }
-    };
+      Blockly.Blocks['s_beep'] = {
+        init: function() {
+          this.appendDummyInput()
+              .appendField("play beep note")
+              .appendField(new Blockly.FieldNumber(60), "NOTE")
+              .appendField("for")
+              .appendField(new Blockly.FieldNumber(0.2), "SECS")
+              .appendField("s");
+          this.setPreviousStatement(true);
+          this.setNextStatement(true);
+          this.setColour('#00bcd4');
+        }
+      };
 
-    Blockly.Blocks['s_color'] = {
-      init: function() {
-        this.appendDummyInput()
-            .appendField("color sensor detects")
-            .appendField(new Blockly.FieldDropdown([["Red","R"], ["Blue","B"], ["Green","G"]]), "COLOR");
-        this.setOutput(true, "Boolean");
-        this.setColour('#4caf50');
-      }
-    };
+      Blockly.Blocks['s_color'] = {
+        init: function() {
+          this.appendDummyInput()
+              .appendField("color sensor detects")
+              .appendField(new Blockly.FieldDropdown([["Red","R"], ["Blue","B"], ["Green","G"]]), "COLOR");
+          this.setOutput(true, "Boolean");
+          this.setColour('#4caf50');
+        }
+      };
 
-    // Initialize the workspace
-    var workspace = Blockly.inject('blocklyDiv', {
-      toolbox: document.getElementById('toolbox'),
-      scrollbars: true,
-      trashcan: true,
-      grid: { spacing: 20, length: 3, colour: '#ccc', snap: true },
-      zoom: { controls: true, wheel: true, startScale: 1.0, maxScale: 3, minScale: 0.3, scaleSpeed: 1.2 }
-    });
+      // Initialize the workspace safely inside the load envelope
+      var workspace = Blockly.inject('blocklyDiv', {
+        toolbox: document.getElementById('toolbox'),
+        scrollbars: true,
+        trashcan: true,
+        grid: { spacing: 20, length: 3, colour: '#ccc', snap: true },
+        zoom: { controls: true, wheel: true, startScale: 1.0, maxScale: 3, minScale: 0.3, scaleSpeed: 1.2 }
+      });
 
-    // Send the compiled block sequence out to Bubble live as it changes
-    workspace.addChangeListener(function() {
-      var code = Blockly.JavaScript.workspaceToCode(workspace);
-      if (parent && parent.window.bubble_fn_sendScriptToBubble) {
-        parent.window.bubble_fn_sendScriptToBubble(code.split('\n'));
-      }
+      // Send the compiled block sequence out to Bubble live as it changes
+      workspace.addChangeListener(function() {
+        var code = Blockly.JavaScript.workspaceToCode(workspace);
+        if (parent && parent.window.bubble_fn_sendScriptToBubble) {
+          parent.window.bubble_fn_sendScriptToBubble(code.split('\n'));
+        }
+      });
+
     });
   </script>
 </body>
 </html>
+
 
