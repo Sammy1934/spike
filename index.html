@@ -3,17 +3,29 @@
 <head>
   <meta charset="utf-8">
   <title>SPIKE Prime IDE</title>
-  <!-- Bypassing unpkg: Fetching directly from the high-availability cdnjs mirror network -->
+  <!-- Load the high-availability cdnjs mirror network -->
   <script src="https://cloudflare.com"></script>
   <script src="https://cloudflare.com"></script>
   <script src="https://cloudflare.com"></script>
   <script src="https://cloudflare.com"></script>
   <style>
-    body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; font-family: sans-serif; }
-    #blocklyDiv { width: 100vw; height: 100vh; }
+    /* FIX: Force the root browser windows to stretch completely open so height doesn't collapse to 0px */
+    html, body { 
+      margin: 0; 
+      padding: 0; 
+      width: 100%; 
+      height: 100%; 
+      overflow: hidden; 
+      font-family: sans-serif; 
+    }
+    #blocklyDiv { 
+      width: 100vw; 
+      height: 100vh; 
+    }
   </style>
 </head>
 <body>
+  <!-- The main graphics workspace element layout container -->
   <div id="blocklyDiv"></div>
 
   <!-- Define the official LEGO SPIKE Prime sidebar toolbars -->
@@ -48,15 +60,13 @@
   </xml>
 
   <script>
-    // Absolute fallback initialization pattern
     function initWorkspace() {
       if (typeof Blockly === 'undefined') {
-        console.log("Retrying engine verification...");
         setTimeout(initWorkspace, 200);
         return;
       }
 
-      // Define the custom word blocks to look exactly like LEGO SPIKE software
+      // Replicate the word blocks to look exactly like LEGO SPIKE software layout properties
       Blockly.Blocks['m_run'] = {
         init: function() {
           this.appendDummyInput()
@@ -144,7 +154,7 @@
         }
       };
 
-      // Initialize the workspace
+      // Initialize the workspace graphics
       var workspace = Blockly.inject('blocklyDiv', {
         toolbox: document.getElementById('toolbox'),
         scrollbars: true,
@@ -153,7 +163,7 @@
         zoom: { controls: true, wheel: true, startScale: 1.0, maxScale: 3, minScale: 0.3, scaleSpeed: 1.2 }
       });
 
-      // Send data out to Bubble live
+      // Synchronize changes back to parent Bubble container frame live
       workspace.addChangeListener(function() {
         var code = Blockly.JavaScript.workspaceToCode(workspace);
         if (parent && parent.window.bubble_fn_sendScriptToBubble) {
@@ -162,7 +172,6 @@
       });
     }
 
-    // Fire verification sequence immediately
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initWorkspace);
     } else {
@@ -171,6 +180,7 @@
   </script>
 </body>
 </html>
+
 
 
 
