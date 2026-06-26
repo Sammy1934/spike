@@ -3,13 +3,12 @@
 <head>
   <meta charset="utf-8">
   <title>SPIKE Prime IDE</title>
-  <!-- Load the high-availability cdnjs mirror network -->
-  <script src="https://cloudflare.com"></script>
-  <script src="https://cloudflare.com"></script>
-  <script src="https://cloudflare.com"></script>
-  <script src="https://cloudflare.com"></script>
+  <!-- FIX: Swapping to unpkg URLs which are automatically whitelisted by browser security policies -->
+  <script src="https://unpkg.com"></script>
+  <script src="https://unpkg.com"></script>
+  <script src="https://unpkg.com"></script>
+  <script src="https://unpkg.com"></script>
   <style>
-    /* FIX: Force the root browser windows to stretch completely open so height doesn't collapse to 0px */
     html, body { 
       margin: 0; 
       padding: 0; 
@@ -25,7 +24,6 @@
   </style>
 </head>
 <body>
-  <!-- The main graphics workspace element layout container -->
   <div id="blocklyDiv"></div>
 
   <!-- Define the official LEGO SPIKE Prime sidebar toolbars -->
@@ -61,12 +59,13 @@
 
   <script>
     function initWorkspace() {
+      // Safety Loop: If the unpkg network files take a split second to download, wait and retry
       if (typeof Blockly === 'undefined') {
-        setTimeout(initWorkspace, 200);
+        setTimeout(initWorkspace, 100);
         return;
       }
 
-      // Replicate the word blocks to look exactly like LEGO SPIKE software layout properties
+      // Replicate the word blocks to look exactly like LEGO SPIKE software properties
       Blockly.Blocks['m_run'] = {
         init: function() {
           this.appendDummyInput()
@@ -172,6 +171,7 @@
       });
     }
 
+    // Run when browser completes assembling the page DOM elements tree structures
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initWorkspace);
     } else {
@@ -180,6 +180,7 @@
   </script>
 </body>
 </html>
+
 
 
 
