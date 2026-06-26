@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <title>SPIKE Prime IDE</title>
-  <!-- FIX: Using secure cdnjs links with type rules to force browsers to execute the script -->
-  <script src="https://cloudflare.com" type="text/javascript"></script>
-  <script src="https://cloudflare.com" type="text/javascript"></script>
-  <script src="https://cloudflare.com" type="text/javascript"></script>
-  <script src="https://cloudflare.com" type="text/javascript"></script>
+  <!-- Force the browser to grab valid, unblocked script engines -->
+  <script src="https://unpkg.com"></script>
+  <script src="https://unpkg.com"></script>
+  <script src="https://unpkg.com"></script>
+  <script src="https://unpkg.com"></script>
   <style>
+    /* Prevent the box from collapsing to 0 pixels tall */
     html, body { 
       margin: 0; 
       padding: 0; 
@@ -24,9 +25,10 @@
   </style>
 </head>
 <body>
+  <!-- The main graphics rendering box container -->
   <div id="blocklyDiv"></div>
 
-  <!-- Define the official LEGO SPIKE Prime sidebar toolbars -->
+  <!-- Define the 9 official LEGO SPIKE Prime sidebar toolbars -->
   <xml id="toolbox" style="display: none">
     <category name="⚙️ Motors" colour="#009688">
       <block type="m_run"></block>
@@ -60,7 +62,7 @@
   <script>
     function initWorkspace() {
       if (typeof Blockly === 'undefined') {
-        setTimeout(initWorkspace, 100);
+        setTimeout(initWorkspace, 200);
         return;
       }
 
@@ -152,7 +154,7 @@
         }
       };
 
-      // Initialize the workspace graphics
+      // Initialize the workspace graphics canvas
       var workspace = Blockly.inject('blocklyDiv', {
         toolbox: document.getElementById('toolbox'),
         scrollbars: true,
@@ -161,7 +163,7 @@
         zoom: { controls: true, wheel: true, startScale: 1.0, maxScale: 3, minScale: 0.3, scaleSpeed: 1.2 }
       });
 
-      // Synchronize changes back to parent Bubble container frame live
+      // Pass compiled list array strings back up to the parent Bubble app frame
       workspace.addChangeListener(function() {
         var code = Blockly.JavaScript.workspaceToCode(workspace);
         if (parent && parent.window.bubble_fn_sendScriptToBubble) {
@@ -178,6 +180,7 @@
   </script>
 </body>
 </html>
+
 
 
 
